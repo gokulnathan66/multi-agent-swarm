@@ -1,0 +1,72 @@
+name: Multi-Platform Publishing
+
+on:
+  push:
+    branches: [main]
+    paths: 
+      - 'content/**'
+      - 'README.md'
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  publish-hashnode:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    
+    steps:
+      - name: Checkout content
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+        
+      - name: Validate required secrets
+        run: |
+          if [ -z "${{ secrets.HASHNODE_PAT }}" ]; then
+            echo "Error: HASHNODE_PAT secret is not set"
+            exit 1
+          fi
+          
+      - name: Publish to Hashnode
+        uses: gokulnathan66/article-automation/hashnode-publish@main
+        with:
+          hashnode-pat: ${{ secrets.HASHNODE_PAT }}
+          hashnode-publication-id: ${{ secrets.HASHNODE_PUBLICATION_ID }}
+          hashnode-publication-host: ${{ secrets.HASHNODE_PUBLICATION_HOST }}
+          github-token: ${{ secrets.VAR_EDIT_TOKEN_GIT }}
+          saved-post-id: ${{ vars.HASHNODE_SAVED_POST_ID }}
+          saved-post-slug: ${{ vars.HASHNODE_SAVED_POST_SLUG }}
+          saved-post-title: ${{ vars.HASHNODE_SAVED_POST_TITLE }}
+          saved-post-url: ${{ vars.HASHNODE_SAVED_POST_URL }}
+          saved-post-published-at: ${{ vars.HASHNODE_SAVED_POST_PUBLISHED_AT }}
+          saved-post-updated-at: ${{ vars.HASHNODE_SAVED_POST_UPDATED_AT }}
+
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    
+    steps:
+      - name: Checkout content
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+        
+      - name: Validate required secrets
+        run: |
+          if [ -z "${{ secrets.DEV_TO_API_KEY }}" ]; then
+            echo "Error: DEV_TO_API_KEY secret is not set"
+            exit 1
+          fi
+        
+      - name: Publish to Dev.to
+        uses: gokulnathan66/article-automation/devto-publish@main
+        with:
+          devto-api-key: ${{ secrets.DEV_TO_API_KEY }}
+          github-token: ${{ secrets.VAR_EDIT_TOKEN_GIT }}
+          saved-post-id: ${{ vars.DEV_TO_SAVED_POST_ID }}
+          saved-post-title: ${{ vars.DEV_TO_SAVED_POST_TITLE }}
+          saved-post-url: ${{ vars.DEV_TO_SAVED_POST_URL }}
+          saved-post-published-at: ${{ vars.DEV_TO_SAVED_POST_PUBLISHED_AT }}
+          saved-post-updated-at: ${{ vars.DEV_TO_SAVED_POST_UPDATED_AT }}
