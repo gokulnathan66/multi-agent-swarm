@@ -1,12 +1,11 @@
-name: Multi-Platform Publishing - Hashnode # Dev.to is not used anymore
+name: Multi-Platform Publishing - Hashnode
 
 on:
   push:
     branches: [main]
-    paths: 
-      - 'content/**'
-      - 'README.md'
+
   workflow_dispatch:
+
 
 env:
   NODE_VERSION: '20'
