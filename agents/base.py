@@ -115,7 +115,10 @@ def code_execution(code: str, language: str = "python") -> str:
 class SwarmConfig:
     """Configuration management for the swarm"""
     
-    def __init__(self, config_path: str = "config.yml"):
+    def __init__(self, config_path: str = None):
+        if config_path is None:
+            # Default to config.yml in the project root (parent of agents directory)
+            config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config.yml')
         self.config_path = config_path
         self.config = self.load_config()
     
@@ -151,8 +154,11 @@ class SwarmConfig:
         }
         
         try:
+            # Ensure the directory exists before writing
+            os.makedirs(os.path.dirname(self.config_path), exist_ok=True)
             with open(self.config_path, 'w') as f:
                 yaml.dump(default_config, f, default_flow_style=False)
+            logger.info(f"Created default config at {self.config_path}")
         except Exception as e:
             logger.error(f"Error saving default config: {e}")
         

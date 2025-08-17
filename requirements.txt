@@ -5,6 +5,12 @@ strands-agents-tools
 # HTTP requests for Ollama API communication
 requests
 
+# YAML configuration file handling
+PyYAML
+
+# Ollama Python client
+ollama
+
 # JSON handling (built-in, but listing for completeness)
 # json - built-in Python module
 

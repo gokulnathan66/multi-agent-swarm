@@ -13,12 +13,12 @@ from typing import Dict, Any
 # Add agents directory to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'agents'))
 
-from agents import SwarmConfig, OllamaClient, ollama_client as global_ollama_client
-from agents.hynicl_agent import create_hynicl_agent
-from agents.search_agent import create_search_agent
-from agents.reasoning_agent import create_reasoning_agent
-from agents.tool_agent import create_tool_agent
-from agents.validation_agent import create_validation_agent
+from hynicl_agent import create_hynicl_agent
+from search_agent import create_search_agent
+from reasoning_agent import create_reasoning_agent
+from tool_agent import create_tool_agent
+from validation_agent import create_validation_agent
+from base import SwarmConfig, OllamaClient
 
 from strands.models.ollama import OllamaModel
 from strands.multiagent import Swarm
@@ -41,7 +41,7 @@ class MultiAgentSwarm:
     
     def initialize_ollama(self):
         """Initialize Ollama client and model"""
-        global global_ollama_client
+        from base import ollama_client
         
         ollama_config = self.config.config["ollama"]
         
@@ -52,7 +52,8 @@ class MultiAgentSwarm:
         )
         
         # Set global client for tools
-        global_ollama_client = self.ollama_client
+        import base
+        base.ollama_client = self.ollama_client
         
         # Test connection
         logger.info("Testing Ollama connection...")

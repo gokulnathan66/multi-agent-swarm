@@ -4,12 +4,14 @@ Reasoning Agent - Logic and Analysis Specialist
 """
 
 import logging
-from strands import Agent
-from strands_tools import memory, calculator
-from . import BaseAgent, ollama_query
+import os
 import yaml
 
-with open('config.yml', 'r') as file:
+from strands import Agent
+from strands_tools import memory, calculator
+from base import BaseAgent, ollama_query
+config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config.yml')
+with open(config_path, 'r') as file:
     config = yaml.safe_load(file)   
 
 logger = logging.getLogger(__name__)

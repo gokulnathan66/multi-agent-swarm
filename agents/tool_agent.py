@@ -4,12 +4,14 @@ Tool Agent - Technical Operations and Implementation Specialist
 """
 
 import logging
-from strands import Agent
-from strands_tools import file_read, file_write, editor, calculator, memory
-from . import BaseAgent, code_execution, ollama_query
+import os
 import yaml
 
-with open('config.yml', 'r') as file:
+from strands import Agent
+from strands_tools import file_read, file_write, editor, calculator, memory
+from base import BaseAgent, code_execution, ollama_query
+config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config.yml')
+with open(config_path, 'r') as file:
     config = yaml.safe_load(file)   
 
 logger = logging.getLogger(__name__)
