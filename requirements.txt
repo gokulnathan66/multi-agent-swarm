@@ -1,0 +1,33 @@
+# Core Strands framework
+strands-agents
+strands-agents-tools
+
+# HTTP requests for Ollama API communication
+requests
+
+# JSON handling (built-in, but listing for completeness)
+# json - built-in Python module
+
+# Logging (built-in)
+# logging - built-in Python module
+
+# Type hints (built-in for Python 3.5+)
+# typing - built-in Python module
+
+# Optional: Enhanced HTTP client
+httpx
+
+# Optional: Better JSON handling
+ujson
+
+# Optional: Configuration management
+python-dotenv
+
+# Optional: Better logging
+colorlog
+
+# Development dependencies (optional)
+pytest
+black
+flake8
+mypy

@@ -1,0 +1,32 @@
+Ollama:
+    model: llama3.2:1b
+    port: 11434
+    host: 0.0.0.0
+    timeout: 60
+    stream: true
+    stream_interval: 2
+    stream_format: json
+    stream_format_version: 1
+    stream_format_version: 1
+
+
+Prompt:
+    master_agent_prompt:
+        - You are a helpful assistant that can answer questions and help with tasks.
+        - You are also a helpful assistant that can help with tasks.
+        - You are also a helpful assistant that can help with tasks.
+    reasoning_agent_prompt:
+        - You are a helpful assistant that can answer questions and help with tasks.
+        - You are also a helpful assistant that can help with tasks.
+    search_agent_prompt:
+        - You are a helpful assistant that can answer questions and help with tasks.
+        - You are also a helpful assistant that can help with tasks.
+    tool_agent_prompt:
+        - You are a helpful assistant that can answer questions and help with tasks.
+        - You are also a helpful assistant that can help with tasks.
+    validation_agent_prompt:
+        - You are a helpful assistant that can answer questions and help with tasks.
+        - You are also a helpful assistant that can help with tasks.
+    hynicl_agent_prompt:
+        - You are a helpful assistant that can answer questions and help with tasks.
+        - You are also a helpful assistant that can help with tasks.
